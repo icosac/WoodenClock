@@ -10,6 +10,7 @@ const int Sveglia=10;
 const int Clock=9;
 
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+RTC_DS3231 rtc;
 
 int timer=0;
 int previousHour=-1;
