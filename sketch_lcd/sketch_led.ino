@@ -1,35 +1,33 @@
 #include <Wire.h>
 #include <RTClib.h>
+#include <LiquidCrystal.h>
 #include "clock.h"
 #include "allarm.h"
 #include "variables.h"
-#include "led.h"
-#include "temp.h"
 
 int timer=0;
 
 void setup() {
   Serial.begin(9600);
-  pinMode(ButtonHour, INPUT);
-  pinMode(ButtonMin, INPUT);
+  lcd.begin(16, 2);
+  pinMode(ButtonUp, INPUT);
+  pinMode(ButtonDown, INPUT);
   pinMode(ButtonAllarm, INPUT);
   pinMode(ButtonClock, INPUT);
-  pinMode(ButtonTemp, INPUT);
+  pinMode(Sveglia, OUTPUT);
+  digitalWrite(Sveglia, LOW);
+  pinMode(Clock, OUTPUT);
+  digitalWrite(Clock, LOW);
   Serial.print(rtc.now().hour());
   Serial.print("-");
   Serial.print(rtc.now().minute());
   Serial.print("-");
   Serial.println(rtc.now().second());
-  if (!(matrix.begin())){
-    Serial.println("Matrix not found");
-    while(1);
-  }
 }
 
 void loop() {
   DateTime RTCtime=rtc.now();
   updateTime(RTCtime);
-  print_time(previousHour, previousMinute);
   if(digitalRead(ButtonAllarm)==HIGH){
     wannaTimer();
   }
@@ -38,13 +36,6 @@ void loop() {
   }
   if (timerHour==RTCtime.hour() && timerMin==RTCtime.minute()){
     setAllarm();
-  }
-  if (digitalRead(ButtonTemp)==HIGH){
-    showTemp();
-  }
-  int analogread=analogRead(BRIGHTNESSCTRL);
-  if (BRIGHTANLG!=analogread && BRIGHTANLG!=120){ //120 is the default value
-    LEDBRIGHTNESS=255*analogread/1023;
   }
   delay(1000);
 }

@@ -6,11 +6,11 @@ const int UNO=6;
 const int DUE=5;
 const int TRE=4;
 const int QUATTRO=3;
-const int Button1=2;
-const int Button2=3;
-const int Button3=4;
-const int Button4=5;
-const int Sveglia=6;
+const int ButtonUp=2;
+const int ButtonDown=3;
+const int ButtonAllarm=4;
+const int ButtonClock=5;
+const int ButtonAllarm=6;
 const int Clock=9;
 
 RTC_DS3231 rtc;
@@ -25,12 +25,12 @@ int timerMin=0;
 void setup() {
   Serial.begin(9600);
   rtc.begin();
-  pinMode(Button1, INPUT);
-  pinMode(Button2, INPUT);
-  pinMode(Button3, INPUT);
-  pinMode(Button4, INPUT);
-  pinMode(Sveglia, OUTPUT);
-  digitalWrite(Sveglia, LOW);
+  pinMode(ButtonUp, INPUT);
+  pinMode(ButtonDown, INPUT);
+  pinMode(ButtonAllarm, INPUT);
+  pinMode(ButtonClock, INPUT);
+  pinMode(ButtonAllarm, OUTPUT);
+  digitalWrite(ButtonAllarm, LOW);
   pinMode(Clock, OUTPUT);
   digitalWrite(Clock, LOW);
   Serial.print(rtc.now().hour());
@@ -56,17 +56,17 @@ void loop() {
   else{
     timer++;
   }
-  if(digitalRead(Button3)==HIGH){
+  if(digitalRead(ButtonAllarm)==HIGH){
     wannaTimer();
   }
-  if(digitalRead(Button4)==HIGH){
+  if(digitalRead(ButtonClock)==HIGH){
     modifyTime();
   }
   delay(100);
 }
 
 
-int SvegliaState=HIGH;
+int ButtonAllarmState=HIGH;
 int count1=0;
 int app=0;
 bool closing=false;
@@ -74,7 +74,7 @@ void closeTimer(){
   Serial.print("CHIUDO  ");
   Serial.println(app);
   if (app==0){
-    digitalWrite(Sveglia, LOW);
+    digitalWrite(ButtonAllarm, LOW);
     app=0;
     closing=false;
     count1=0;
@@ -83,7 +83,7 @@ void closeTimer(){
     closing=true;   
     app--;
     delay(1000);
-    if(digitalRead(Button3)==HIGH){
+    if(digitalRead(ButtonAllarm)==HIGH){
       closeTimer();
     }
   }
@@ -93,14 +93,14 @@ void wannaTimer(){
   Serial.print("IMPOSTO  ");
   Serial.println(app);
   if (app==2){
-    SvegliaState=HIGH;
-    digitalWrite(Sveglia, SvegliaState);
+    ButtonAllarmState=HIGH;
+    digitalWrite(ButtonAllarm, ButtonAllarmState);
     app++;
   }
   else if (app<2){
     app++;
     delay(1000);
-    if(digitalRead(Button3)==HIGH){
+    if(digitalRead(ButtonAllarm)==HIGH){
       wannaTimer();
     }
   }
@@ -109,16 +109,16 @@ void wannaTimer(){
       app=3;
     }
     if(count1==9){
-      if (SvegliaState==HIGH){
-        SvegliaState=LOW;
+      if (ButtonAllarmState==HIGH){
+        ButtonAllarmState=LOW;
       }
       else {
-        SvegliaState=HIGH;
+        ButtonAllarmState=HIGH;
       }
-      digitalWrite(Sveglia, SvegliaState);
+      digitalWrite(ButtonAllarm, ButtonAllarmState);
       count1=0;
     }
-    if(digitalRead(Button1)==HIGH){
+    if(digitalRead(ButtonUp)==HIGH){
       if (timerHour==23){
         timerHour=0;
       }
@@ -129,7 +129,7 @@ void wannaTimer(){
       Serial.print(":");
       Serial.println(timerMin);
     }
-    if(digitalRead(Button2)==HIGH){
+    if(digitalRead(ButtonDown)==HIGH){
       if(timerMin==59){
         timerMin=0;
         if(timerHour==23){
@@ -146,7 +146,7 @@ void wannaTimer(){
       Serial.print(":");
       Serial.println(timerMin);
     }
-    if(digitalRead(Button3)==HIGH){
+    if(digitalRead(ButtonAllarm)==HIGH){
       closeTimer();
     }
     count1++;
@@ -172,7 +172,7 @@ void closeTime(){
     Serial.print(old.hour());
     Serial.print(":");
     Serial.println(old.minute());
-    digitalWrite(Sveglia, LOW);
+    digitalWrite(ButtonAllarm, LOW);
     app=0;
     closing=false;
     count1=0;
@@ -181,7 +181,7 @@ void closeTime(){
     closing=true;   
     app--;
     delay(1000);
-    if(digitalRead(Button4)==HIGH){
+    if(digitalRead(ButtonClock)==HIGH){
       closeTime();
     }
   }
@@ -201,7 +201,7 @@ void modifyTime(){
   else if (app<4){
     app++;
     delay(1000);
-    if(digitalRead(Button4)==HIGH){
+    if(digitalRead(ButtonClock)==HIGH){
       modifyTime();
     }
   }
@@ -214,12 +214,12 @@ void modifyTime(){
         ClockState=LOW;
       }
       else {
-        SvegliaState=HIGH;
+        ButtonAllarmState=HIGH;
       }
       digitalWrite(Clock, ClockState);
       count1=0;
     }
-    if(digitalRead(Button1)==HIGH){
+    if(digitalRead(ButtonUp)==HIGH){
       if (appHour==23){
         appHour=0;
       }
@@ -230,7 +230,7 @@ void modifyTime(){
       Serial.print(":");
       Serial.println(appMin);
     }
-    if(digitalRead(Button2)==HIGH){
+    if(digitalRead(ButtonDown)==HIGH){
       if(appMin==59){
         appMin=0;
         if(appHour==23){
@@ -247,7 +247,7 @@ void modifyTime(){
       Serial.print(":");
       Serial.println(appMin);
     }
-    if(digitalRead(Button4)==HIGH){
+    if(digitalRead(ButtonClock)==HIGH){
       closeTime();
     }
     count1++;

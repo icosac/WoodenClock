@@ -14,8 +14,6 @@ const int SDMISO=9;
 
 const int Speaker=8;
 
-const int TempSens=A0;
-
 // const int Sveglia=13;
 // const int Clock=9;
 
@@ -30,10 +28,12 @@ int timerHour=0;
 int timerMin=0;
 
 int temperature=0;
+const int tempSens=A0;
 
 Adafruit_IS31FL3731 matrixmatrix = Adafruit_IS31FL3731();;
 int LEDBRIGHTNESS=30;
 const int BRIGHTNESSCTRL=A1;
+int BRIGHTANLG=120;
 
 bool ALLARM=false;
 
