@@ -1,7 +1,8 @@
 #include "allarm.h"
+#include "clock.h"
 
 int SvegliaState=HIGH;
-// int count1=0;
+int count1Al=0;
 int appAllarm=0;
 bool closingAllarm=false;
 
@@ -13,7 +14,7 @@ void closeTimer(){
     digitalWrite(Sveglia, LOW);
     appAllarm=0;
     closingAllarm=false;
-    // count1=0;
+    count1Al=0;
   }
   else if (appAllarm>1){
     closingAllarm=true;
@@ -45,7 +46,7 @@ void wannaTimer(){
     if(closingAllarm){
       appAllarm=3;
     }
-    // if(count1==9){
+    if(count1Al==9){
       if (SvegliaState==HIGH){
         SvegliaState=LOW;
       }
@@ -53,7 +54,8 @@ void wannaTimer(){
         SvegliaState=HIGH;
       }
       digitalWrite(Sveglia, SvegliaState);
-      //count1=0;
+      count1Al=0;
+      showTime('a', timerHour, timerMin);
     }
     if(analogRead(ButtonUp)>AN_HIGH){
       if (timerHour==23){
@@ -86,9 +88,9 @@ void wannaTimer(){
     if(analogRead(ButtonAllarm)>AN_HIGH){
       closeTimer();
     }
-    // count1++;
+    count1Al++;
     delay(100);
-  //}
+  }
   appAllarm=0;
 }
 

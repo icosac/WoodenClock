@@ -10,10 +10,6 @@ int timer=0;
 void setup() {
   Serial.begin(9600);
   lcd.begin(16, 2);
-  pinMode(ButtonUp, INPUT);
-  pinMode(ButtonDown, INPUT);
-  pinMode(ButtonAllarm, INPUT);
-  pinMode(ButtonClock, INPUT);
   pinMode(Sveglia, OUTPUT);
   digitalWrite(Sveglia, LOW);
   pinMode(Clock, OUTPUT);
@@ -26,16 +22,15 @@ void setup() {
 }
 
 void loop() {
-  DateTime RTCtime=rtc.now();
-  updateTime(RTCtime);
-  if(digitalRead(ButtonAllarm)==HIGH){
+  if(analogRead(ButtonAllarm)>AN_HIGH){
     wannaTimer();
   }
-  if(digitalRead(ButtonClock)==HIGH){
+  if(analogRead(ButtonClock)>AN_HIGH){
     modifyTime();
   }
-  if (timerHour==RTCtime.hour() && timerMin==RTCtime.minute()){
+  if (timerHour==rtc.now().hour() && timerMin==rtc.now().minute()){
     setAllarm();
   }
+  showTime();
   delay(1000);
 }

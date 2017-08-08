@@ -7,7 +7,8 @@
 void closeTime();
 void modifyTime();
 String convertIntTo2DigitString(int i);
-void showTime(int hh, int mm);
-void updateTime(DateTime RTCtime);
+void showTime();
+void showTime(char c, int hh, int mm);
+void updateTime();
 
 #endif

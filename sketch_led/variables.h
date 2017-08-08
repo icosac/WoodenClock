@@ -22,6 +22,7 @@ extern int previousDay;
 extern int previousMonth;
 extern int timerHour;
 extern int timerMin;
-extern int temperature;
+
+int temperature();
 
 #endif
