@@ -2,6 +2,7 @@
 #define ALLARM_H
 
 #include "variables.h"
+#include "led.h"
 
 void closeTimer();
 void wannaTimer();

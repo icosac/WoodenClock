@@ -2,13 +2,11 @@
 #define CLOCK_H
 
 #include "variables.h"
-#include <LiquidCrystal.h>
+#include "led.h"
 
 void closeTime();
 void modifyTime();
-String convertIntTo2DigitString(int i);
-void showTime();
-void showTime(char c, int hh, int mm);
-void updateTime();
+void showTime(int hh, int mm);
+void updateTime(DateTime RTCtime);
 
 #endif
