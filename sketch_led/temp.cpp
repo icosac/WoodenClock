@@ -23,6 +23,6 @@ int getTemp(){
 }
 
 void showTemp(){
-    print_temp((temperature());
+    print_temp((getTemp());
     delay(5000);
 }
