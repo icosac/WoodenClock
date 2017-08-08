@@ -43,8 +43,8 @@ void loop() {
     showTemp();
   }
   int analogread=analogRead(BRIGHTNESSCTRL);
-  if (BRIGHTANLG!=analogread){
-    BRIGHTNESS=255*analogread/1023;
+  if (BRIGHTANLG!=analogread && BRIGHTANLG!=120){ //120 is the default value
+    LEDBRIGHTNESS=255*analogread/1023;
   }
   delay(1000);
 }

@@ -16,9 +16,7 @@ extern const int SDCS;
 extern const int SDMOSI;
 extern const int SDMISO;
 
-extern const int Speaker=8;
-
-extern const int TempSens=A0;
+extern const int Speaker;
 
 // extern const int Sveglia;
 // extern const int Clock;
@@ -35,10 +33,12 @@ extern int timerHour;
 extern int timerMin;
 
 extern int temperature;
+extern const int tempSens;
 
 extern Adafruit_IS31FL3731 matrix;
 extern int LEDBRIGHTNESS;
 extern const int BRIGHTNESSCTRL;
+extern int BRIGHTANLG;
 
 extern bool ALLARM;
 

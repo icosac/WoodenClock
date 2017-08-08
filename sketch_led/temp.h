@@ -1,9 +1,10 @@
 #ifndef TEMP_H
 #define TEMP_H
 
-#include"variables.h"
+#include "variables.h"
+#include "led.h"
 
-int getTemp();
+void getTemp();
 void showTemp();
 
 #endif
