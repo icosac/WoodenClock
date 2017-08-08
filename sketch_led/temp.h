@@ -3,7 +3,7 @@
 
 #include"variables.h"
 
-int temperature();
+int getTemp();
 void showTemp();
 
 #endif

@@ -168,22 +168,22 @@ void print_time(int hh, int mm){
   matrix.drawBitmap(4, 0, (byte*)(noArray[(int)(hour[1]-'0')]), 3, 9, LEDBRIGHTNESS);
   if((previousSecond%2)==0){
     if (ALLARM){
-      matrix.drawBitmap(8, 0, *sepAllarm, 3, 9, LEDBRIGHTNESS);
+      matrix.drawBitmap(8, 0, sepAllarm, 3, 9, LEDBRIGHTNESS);
     }
     else{
-      matrix.drawBitmap(8, 0, *sepClock, 3, 9, LEDBRIGHTNESS);
+      matrix.drawBitmap(8, 0, sepClock, 3, 9, LEDBRIGHTNESS);
     }
   }
   matrix.drawBitmap(9, 0, (byte*)(noArray[(int)(min[0]-'0')]), 3, 9, LEDBRIGHTNESS);
-  matrix.drawBitmap(13, 0, (byte*)(noArray[(int)min[1]-'0')]), 3, 9, LEDBRIGHTNESS);
+  matrix.drawBitmap(13, 0, (byte*)(noArray[(int)(min[1]-'0')]), 3, 9, LEDBRIGHTNESS);
 }
 
 void print_temp(int tt){
   String temp=convertIntTo2DigitString(tt);
 
   matrix.clear();
-  matrix.drawBitmap(0, 0, (byte*)(noArray[(int)(tt[0]-'0')]), 3, 9, LEDBRIGHTNESS);
-  matrix.drawBitmap(4, 0, (byte*)(noArray[(int)(tt[1]-'0')]), 3, 9, LEDBRIGHTNESS);
-  matrix.drawBitmap(8, 0, *degree, 3, 9, LEDBRIGHTNESS);
-  matric.drawBitmap(12, 0, *Celsius, 4, 9, LEDBRIGHTNESS);
+  matrix.drawBitmap(0, 0, (byte*)(noArray[(int)(temp[0]-'0')]), 3, 9, LEDBRIGHTNESS);
+  matrix.drawBitmap(4, 0, (byte*)(noArray[(int)(temp[1]-'0')]), 3, 9, LEDBRIGHTNESS);
+  matrix.drawBitmap(8, 0, degree, 3, 9, LEDBRIGHTNESS);
+  matrix.drawBitmap(12, 0, Celsius, 4, 9, LEDBRIGHTNESS);
 }

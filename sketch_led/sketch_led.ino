@@ -4,11 +4,9 @@
 #include "allarm.h"
 #include "variables.h"
 #include "led.h"
-#include <Adafruit_IS31FL3731.h>
+#include "temp.h"
 
 int timer=0;
-
-matrix = Adafruit_IS31FL3731();
 
 void setup() {
   Serial.begin(9600);
@@ -22,7 +20,7 @@ void setup() {
   Serial.print(rtc.now().minute());
   Serial.print("-");
   Serial.println(rtc.now().second());
-  if (!(matrix.begin()){
+  if (!(matrix.begin())){
     Serial.println("Matrix not found");
     while(1);
   }

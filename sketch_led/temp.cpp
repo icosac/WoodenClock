@@ -1,6 +1,6 @@
 #include "temp.h"
 
-int temperature(){
+int getTemp(){
   int read_an=analogRead(tempSens);
   double temp_app=((read_an*0.0048)-0.5)*100;
   Serial.print("Read_an: ");

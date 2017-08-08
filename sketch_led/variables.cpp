@@ -31,7 +31,7 @@ int timerMin=0;
 
 int temperature=0;
 
-Adafruit_IS31FL3731 matrix;
+Adafruit_IS31FL3731 matrixmatrix = Adafruit_IS31FL3731();;
 int LEDBRIGHTNESS=30;
 const int BRIGHTNESSCTRL=A1;
 
