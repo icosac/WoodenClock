@@ -8,11 +8,12 @@ const int ButtonTemp=4;
 const int ButtonAllarm=3;
 const int ButtonClock=2;
 
-const int SDCS=6;
-const int SDMOSI=10;
-const int SDMISO=9;
+const int SDCS=7;
+const int SDMOSI=11;
+const int SDMISO=12;
+const int SDCLK=13;
 
-const int Speaker=8;
+const int Speaker=9;
 
 // const int Sveglia=13;
 // const int Clock=9;
@@ -27,8 +28,10 @@ int previousSecond=-1;
 int timerHour=0;
 int timerMin=0;
 
-int temperature=0;
-const int tempSens=A0;
+int temperature=-253;
+int humidity=0;
+const int tempSens=8;
+const int DHTTYPE=22;
 
 Adafruit_IS31FL3731 matrix = Adafruit_IS31FL3731();;
 int LEDBRIGHTNESS=30;

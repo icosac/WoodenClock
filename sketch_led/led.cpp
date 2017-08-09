@@ -157,6 +157,17 @@ byte Celsius[]={ B0000000,
               B11110000
 };
 
+byte percentage[]={ B1100100,
+              B11010000,
+              B00010000,
+              B00100000,
+              B00100000,
+              B00100000,
+              B01000000,
+              B01011000,
+              B10011000
+};
+
 byte *noArray[] = {zero, one, two, three, four, five, six, seven, eight, nine};
 
 void print_time(int hh, int mm){
@@ -186,4 +197,17 @@ void print_temp(int tt){
   matrix.drawBitmap(4, 0, (byte*)(noArray[(int)(temp[1]-'0')]), 3, 9, LEDBRIGHTNESS);
   matrix.drawBitmap(8, 0, degree, 3, 9, LEDBRIGHTNESS);
   matrix.drawBitmap(12, 0, Celsius, 4, 9, LEDBRIGHTNESS);
+}
+
+
+void print_hum(int uu){
+  if (uu==100){//Fuck, are you in the Amazon rainforest??
+    uu==99;
+  }
+  String hum=convertIntTo2DigitString(uu);
+
+  matrix.clear();
+  matrix.drawBitmap(0, 0, (byte*)(noArray[(int)(hum[0]-'0')]), 3, 9, LEDBRIGHTNESS);
+  matrix.drawBitmap(5, 0, (byte*)(noArray[(int)(hum[1]-'0')]), 3, 9, LEDBRIGHTNESS);
+  matrix.drawBitmap(10, 0, percentage, 3, 9, LEDBRIGHTNESS);
 }

@@ -15,6 +15,7 @@ extern const int ButtonTemp;
 extern const int SDCS;
 extern const int SDMOSI;
 extern const int SDMISO;
+extern const int SDCLK;
 
 extern const int Speaker;
 
@@ -33,7 +34,9 @@ extern int timerHour;
 extern int timerMin;
 
 extern int temperature;
+extern int humidity;
 extern const int tempSens;
+extern const int DHTTYPE;
 
 extern Adafruit_IS31FL3731 matrix;
 extern int LEDBRIGHTNESS;

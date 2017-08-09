@@ -92,5 +92,21 @@ void wannaTimer(){
 }
 
 void setAllarm(){
+  TMRpcm tmrpcm;
+  tmrpcm.speakerPin = Speaker;
+  if (!SD.begin(7)) {
+    Serial.println("SD fail");
+    return;
+  }
+  tmrpcm.setVolume(4);
+  tmrpcm.play("Allarm.wav");
+  if(digitalRead(ButtonAllarm)==HIGH ||
+      digitalRead(ButtonClock)==HIGH ||
+      digitalRead(ButtonHour)==HIGH ||
+      digitalRead(ButtonMin)==HIGH ||
+      digitalRead(ButtonTemp)==HIGH){
 
+    tmrpcm.stopPlayback();
+    return;
+  }
 }
