@@ -3,6 +3,7 @@
 
 #include "variables.h"
 #include "led.h"
+#include <DHT.h>
 
 void getTemp();
 void showTemp();

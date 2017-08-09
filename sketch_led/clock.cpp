@@ -103,6 +103,8 @@ void updateTime(DateTime RTCtime){
   }
   if (previousMinute!=appMM){
     previousMinute=appMM;
+    matrix.clear();
+    print_time(previousHour, previousMinute);
   }
   // previousSecond=RTCtime.second();
   // previousDay=RTCtime.day();

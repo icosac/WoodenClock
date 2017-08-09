@@ -29,7 +29,6 @@ void setup() {
 void loop() {
   DateTime RTCtime=rtc.now();
   updateTime(RTCtime);
-  print_time(previousHour, previousMinute);
   if(digitalRead(ButtonAllarm)==HIGH){
     wannaTimer();
   }
@@ -44,7 +43,9 @@ void loop() {
   }
   int analogread=analogRead(BRIGHTNESSCTRL);
   if (BRIGHTANLG!=analogread && BRIGHTANLG!=120){ //120 is the default value
+    BRIGHTANLG=analogread;
     LEDBRIGHTNESS=255*analogread/1023;
   }
+  previousSecond++;
   delay(1000);
 }

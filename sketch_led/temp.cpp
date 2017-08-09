@@ -6,8 +6,8 @@ void getTemp(){
   dht.begin();
 
   for (int i=0; i<100; i++){
-    hum = dht.readHumidity();
-    temp= dht.readTemperature();
+    humidity = dht.readHumidity();
+    temperature = dht.readTemperature();
   }
   humidity=(int)(humidity/100);
   temperature=(int)(temperature/100);

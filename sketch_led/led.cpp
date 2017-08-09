@@ -97,7 +97,7 @@ byte nine[]={ B11100000,
               B00100000,
               B00100000,
               B00100000,
-              B00100000
+              B11100000
 };
 
 byte zero[]={ B11100000,
@@ -122,28 +122,37 @@ byte degree[]={ B11100000,
               B10100000
 };
 
-byte sepClock[]={ B11100000,
+byte sepClock[]={ B00000000,
               B00000000,
-              B01000000,
+              B10000000,
               B00000000,
               B00000000,
               B00000000,
-              B01000000,
+              B10000000,
               B00000000,
               B00000000
-
 };
 
-byte sepAllarm[]={ B11100000,
+byte sepAllarm[]={ B00000000,
               B00000000,
-              B01000000,
+              B10000000,
               B00000000,
               B00000000,
               B00000000,
-              B01000000,
+              B10000000,
               B00000000,
               B00000000
+};
 
+byte clean[]={ B00000000,
+              B00000000,
+              B00000000,
+              B00000000,
+              B00000000,
+              B00000000,
+              B00000000,
+              B00000000,
+              B00000000
 };
 
 byte Celsius[]={ B0000000,
@@ -170,11 +179,10 @@ byte percentage[]={ B1100100,
 
 byte *noArray[] = {zero, one, two, three, four, five, six, seven, eight, nine};
 
-void print_time(int hh, int mm){
+void print_time(int hh, int mm, char c){
   String hour=convertIntTo2DigitString(hh);
   String min=convertIntTo2DigitString(mm);
 
-  matrix.clear();
   matrix.drawBitmap(0, 0, (byte*)(noArray[(int)(hour[0]-'0')]), 3, 9, LEDBRIGHTNESS);
   matrix.drawBitmap(4, 0, (byte*)(noArray[(int)(hour[1]-'0')]), 3, 9, LEDBRIGHTNESS);
   if((previousSecond%2)==0){
@@ -184,6 +192,9 @@ void print_time(int hh, int mm){
     else{
       matrix.drawBitmap(8, 0, sepClock, 3, 9, LEDBRIGHTNESS);
     }
+  }
+  else {
+    matrix.drawBitmap(8, 0, clean, 3, 9, LEDBRIGHTNESS);
   }
   matrix.drawBitmap(9, 0, (byte*)(noArray[(int)(min[0]-'0')]), 3, 9, LEDBRIGHTNESS);
   matrix.drawBitmap(13, 0, (byte*)(noArray[(int)(min[1]-'0')]), 3, 9, LEDBRIGHTNESS);
