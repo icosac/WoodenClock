@@ -7,6 +7,7 @@ int appHour=-1, appMin=-1;
 // int ClockState=HIGH;
 
 void modifyTime(){
+  matrix.clear();
   Serial.print("CAMBIO ORA ");
   Serial.println(appClock);
   if (appClock==4){ //If the button has been pressed for 5 seconds (0-4) then change the time
@@ -24,6 +25,7 @@ void modifyTime(){
       modifyTime();
     }
   }
+  flash();
   while(appClock>4 || closingClock){ //if the button has been pressed enough, and we are ready to go the start editing
     if(closingClock){ //Closing is true when it started to exit the editing mode but then stopped
       appClock=5;
@@ -42,12 +44,12 @@ void modifyTime(){
     if(digitalRead(ButtonMin)==HIGH){
       if(appMin==59){
         appMin=0;
-        if(appHour==23){
-          appHour=0;
-        }
-        else{
-          appHour++;
-        }
+//        if(appHour==23){
+//          appHour=0;
+//        }
+//        else{
+//          appHour++;
+//        }
       }
       else{
         appMin++;
@@ -60,9 +62,11 @@ void modifyTime(){
       closeTime();
     }
     delay(100);
+    matrix.clear();
     print_time(appHour, appMin);
   }
   appClock=0;
+  matrix.clear();
 }
 
 void closeTime(){
@@ -93,6 +97,7 @@ void closeTime(){
       closeTime();
     }
   }
+  matrix.clear();
 }
 
 void updateTime(DateTime RTCtime){
@@ -104,8 +109,8 @@ void updateTime(DateTime RTCtime){
   if (previousMinute!=appMM){
     previousMinute=appMM;
     matrix.clear();
-    print_time(previousHour, previousMinute);
   }
+  print_time(previousHour, previousMinute);
   // previousSecond=RTCtime.second();
   // previousDay=RTCtime.day();
   // previousMonth=RTCtime.month();

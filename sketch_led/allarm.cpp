@@ -24,10 +24,12 @@ void closeTimer(){
       closeTimer();
     }
   }
+  matrix.clear();
 }
 
 //Modifica la sveglia
 void wannaTimer(){
+  matrix.clear();
   Serial.print("IMPOSTO SVEGLIA ");
   Serial.println(appAllarm);
   if (appAllarm==2){ //Se sono passati due secondi allora entra nel successivo ciclo while
@@ -43,8 +45,9 @@ void wannaTimer(){
       wannaTimer();
     }
   }
+  flash();
   while(appAllarm>2||closingAllarm){ //Se sono passati due secondi o se si è provato a uscire ma non si è terminato il countdown
-    if(closingAllarm){ //Risetto il countdown nel caso in cui si abbia deciso di non uscire
+     if(closingAllarm){ //Risetto il countdown nel caso in cui si abbia deciso di non uscire
       appAllarm=3;
     }
     // if(count1==9){
@@ -68,12 +71,12 @@ void wannaTimer(){
     if(digitalRead(ButtonMin)==HIGH){ //Se viene premuto il pulsante dei minuti aumentano i minuti
       if(timerMin==59){
         timerMin=0;
-        if(timerHour==23){
-          timerHour=0;
-        }
-        else{
-          timerHour++;
-        }
+//        if(timerHour==23){
+//          timerHour=0;
+//        }
+//        else{
+//          timerHour++;
+//        }
       }
       else{
         timerMin++;
@@ -85,10 +88,12 @@ void wannaTimer(){
     if(digitalRead(ButtonAllarm)==HIGH){ //Se viene premuto di nuovo il pulsante per la sveglia allora si vuole uscire
       closeTimer();
     }
+    matrix.clear();
     print_time(timerHour, timerMin);
     delay(100);
   }
   appAllarm=0;
+  matrix.clear();
 }
 
 void setAllarm(){

@@ -1,5 +1,4 @@
 #include "led.h"
-#include "variables.h"
 
 byte one[]= {B01000000,
              B11000000,
@@ -179,7 +178,7 @@ byte percentage[]={ B1100100,
 
 byte *noArray[] = {zero, one, two, three, four, five, six, seven, eight, nine};
 
-void print_time(int hh, int mm, char c){
+void print_time(int hh, int mm){
   String hour=convertIntTo2DigitString(hh);
   String min=convertIntTo2DigitString(mm);
 
@@ -195,6 +194,10 @@ void print_time(int hh, int mm, char c){
   }
   else {
     matrix.drawBitmap(8, 0, clean, 3, 9, LEDBRIGHTNESS);
+    matrix.drawPixel(8, 2, 0);
+    matrix.drawPixel(8, 6, 0);
+    matrix.drawPixel(8, 3, 0);
+    matrix.drawPixel(8, 7, 0);
   }
   matrix.drawBitmap(9, 0, (byte*)(noArray[(int)(min[0]-'0')]), 3, 9, LEDBRIGHTNESS);
   matrix.drawBitmap(13, 0, (byte*)(noArray[(int)(min[1]-'0')]), 3, 9, LEDBRIGHTNESS);
@@ -203,7 +206,6 @@ void print_time(int hh, int mm, char c){
 void print_temp(int tt){
   String temp=convertIntTo2DigitString(tt);
 
-  matrix.clear();
   matrix.drawBitmap(0, 0, (byte*)(noArray[(int)(temp[0]-'0')]), 3, 9, LEDBRIGHTNESS);
   matrix.drawBitmap(4, 0, (byte*)(noArray[(int)(temp[1]-'0')]), 3, 9, LEDBRIGHTNESS);
   matrix.drawBitmap(8, 0, degree, 3, 9, LEDBRIGHTNESS);
@@ -217,8 +219,17 @@ void print_hum(int uu){
   }
   String hum=convertIntTo2DigitString(uu);
 
-  matrix.clear();
   matrix.drawBitmap(0, 0, (byte*)(noArray[(int)(hum[0]-'0')]), 3, 9, LEDBRIGHTNESS);
   matrix.drawBitmap(5, 0, (byte*)(noArray[(int)(hum[1]-'0')]), 3, 9, LEDBRIGHTNESS);
   matrix.drawBitmap(10, 0, percentage, 3, 9, LEDBRIGHTNESS);
 }
+
+void flash (){
+  for (int x=0;x<15;x++){
+    for (int y=0;y<8;y++){
+      matrix.drawPixel(x, y, 255);
+    }
+  }
+  matrix.clear();
+}
+

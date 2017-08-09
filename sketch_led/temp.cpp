@@ -14,10 +14,13 @@ void getTemp(){
 }
 
 void showTemp(){
+    matrix.clear();
     print_temp(temperature);
     delay(3000);
+    matrix.clear();
     print_hum(humidity);
     delay(2000);
+    matrix.clear();
 }
 
 // OLD CODE for TMP36
