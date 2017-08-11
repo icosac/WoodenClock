@@ -8,8 +8,8 @@ int appHour=-1, appMin=-1;
 
 void modifyTime(){
   matrix.clear();
-  Serial.print("CAMBIO ORA ");
-  Serial.println(appClock);
+  // Serial.print("CAMBIO ORA ");
+  // Serial.println(appClock);
   if (appClock==4){ //If the button has been pressed for 5 seconds (0-4) then change the time
     // ClockState=HIGH;
     // digitalWrite(Clock, ClockState);
@@ -37,9 +37,9 @@ void modifyTime(){
       else {
         appHour++;
       }
-      Serial.print(appHour);
-      Serial.print(":");
-      Serial.println(appMin);
+      // Serial.print(appHour);
+      // Serial.print(":");
+      // Serial.println(appMin);
     }
     if(digitalRead(ButtonMin)==HIGH){
       if(appMin==59){
@@ -54,9 +54,9 @@ void modifyTime(){
       else{
         appMin++;
       }
-      Serial.print(appHour);
-      Serial.print(":");
-      Serial.println(appMin);
+      // Serial.print(appHour);
+      // Serial.print(":");
+      // Serial.println(appMin);
     }
     if(digitalRead(ButtonClock)==HIGH){
       closeTime();
@@ -70,20 +70,20 @@ void modifyTime(){
 }
 
 void closeTime(){
-  Serial.print("CHIUDO CAMBIO ORA ");
-  Serial.println(appClock);
+  // Serial.print("CHIUDO CAMBIO ORA ");
+  // Serial.println(appClock);
   if (appClock==0){
     DateTime old=rtc.now();
-    Serial.print("old: ");
-    Serial.print(old.hour());
-    Serial.print(":");
-    Serial.println(old.minute());
+    // Serial.print("old: ");
+    // Serial.print(old.hour());
+    // Serial.print(":");
+    // Serial.println(old.minute());
     rtc.adjust(DateTime(old.year(), old.month(), old.day(), appHour, appMin, old.second()));
     old=rtc.now();
-    Serial.print("new: ");
-    Serial.print(old.hour());
-    Serial.print(":");
-    Serial.println(old.minute());
+    // Serial.print("new: ");
+    // Serial.print(old.hour());
+    // Serial.print(":");
+    // Serial.println(old.minute());
     // digitalWrite(Sveglia, LOW);
     appClock=0;
     closingClock=false;
@@ -103,6 +103,7 @@ void closeTime(){
 void updateTime(DateTime RTCtime){
   int appHH=RTCtime.hour();
   int appMM=RTCtime.minute();
+  previousSecond=RTCtime.second();
   if (previousHour!=appHH){
     previousHour=appHH;
   }

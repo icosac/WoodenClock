@@ -6,7 +6,7 @@
 #include "led.h"
 #include "temp.h"
 
-int timer=0;
+DateTime RTCtime;
 
 void setup() {
   Serial.begin(9600);
@@ -15,25 +15,32 @@ void setup() {
   pinMode(ButtonAllarm, INPUT);
   pinMode(ButtonClock, INPUT);
   pinMode(ButtonTemp, INPUT);
-  Serial.print(rtc.now().hour());
-  Serial.print("-");
-  Serial.print(rtc.now().minute());
-  Serial.print("-");
-  Serial.println(rtc.now().second());
+  // Serial.print(rtc.now().hour());
+  // Serial.print("-");
+  // Serial.print(rtc.now().minute());
+  // Serial.print("-");
+  // Serial.println(rtc.now().second());
   if (!(matrix.begin())){
-    Serial.println("Matrix not found");
+    // Serial.println("Matrix not found");
     while(1);
   }
+  RTCtime=rtc.now();
 }
 
 void loop() {
-  DateTime RTCtime=rtc.now();
+  RTCtime=rtc.now();
   updateTime(RTCtime);
   if(digitalRead(ButtonAllarm)==HIGH){
     wannaTimer();
   }
   if(digitalRead(ButtonClock)==HIGH){
     modifyTime();
+  }
+  if (digitalRead(ButtonHour)==HIGH||digitalRead(ButtonMin)==HIGH){
+    matrix.clear();
+    print_time(timerHour, timerMin);
+    delay(3000);
+    matrix.clear();
   }
   if (timerHour==RTCtime.hour() && timerMin==RTCtime.minute()){
     setAllarm();
@@ -46,6 +53,6 @@ void loop() {
     BRIGHTANLG=analogread;
     LEDBRIGHTNESS=255*analogread/1023;
   }
-  previousSecond++;
+  
   delay(1000);
 }

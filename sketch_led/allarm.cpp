@@ -7,8 +7,8 @@ bool closingAllarm=false;
 
 //Blocca la modifica della sveglia.
 void closeTimer(){
-  Serial.print("CHIUDO  ");
-  Serial.println(appAllarm);
+  // Serial.print("CHIUDO  ");
+  // Serial.println(appAllarm);
   if (appAllarm==1){ //Se ha finito il countdown allora setto tutto alla normalità ed esco
     // digitalWrite(Sveglia, LOW);
     appAllarm=0;
@@ -30,8 +30,8 @@ void closeTimer(){
 //Modifica la sveglia
 void wannaTimer(){
   matrix.clear();
-  Serial.print("IMPOSTO SVEGLIA ");
-  Serial.println(appAllarm);
+  // Serial.print("IMPOSTO SVEGLIA ");
+  // Serial.println(appAllarm);
   if (appAllarm==2){ //Se sono passati due secondi allora entra nel successivo ciclo while
     SvegliaState=HIGH;
     // digitalWrite(Sveglia, SvegliaState);
@@ -82,9 +82,9 @@ void wannaTimer(){
         timerMin++;
       }
     }
-    Serial.print(timerHour);
-    Serial.print(":");
-    Serial.println(timerMin);
+    // Serial.print(timerHour);
+    // Serial.print(":");
+    // Serial.println(timerMin);
     if(digitalRead(ButtonAllarm)==HIGH){ //Se viene premuto di nuovo il pulsante per la sveglia allora si vuole uscire
       closeTimer();
     }
@@ -100,18 +100,23 @@ void setAllarm(){
   TMRpcm tmrpcm;
   tmrpcm.speakerPin = Speaker;
   if (!SD.begin(7)) {
-    Serial.println("SD fail");
+    // Serial.println("SD fail");
     return;
   }
   tmrpcm.setVolume(4);
-  tmrpcm.play("Allarm.wav");
-  if(digitalRead(ButtonAllarm)==HIGH ||
-      digitalRead(ButtonClock)==HIGH ||
-      digitalRead(ButtonHour)==HIGH ||
-      digitalRead(ButtonMin)==HIGH ||
-      digitalRead(ButtonTemp)==HIGH){
-
+//  while(ALLARM){
+    tmrpcm.play("Allarm.wav");
+    if(digitalRead(ButtonAllarm)==HIGH ||
+        digitalRead(ButtonClock)==HIGH ||
+        digitalRead(ButtonHour)==HIGH ||
+        digitalRead(ButtonMin)==HIGH ||
+        digitalRead(ButtonTemp)==HIGH){
+  
+      tmrpcm.stopPlayback();
+      ALLARM=false;
+      return;
+    }
+    delay(18000);
     tmrpcm.stopPlayback();
-    return;
-  }
+//  }
 }

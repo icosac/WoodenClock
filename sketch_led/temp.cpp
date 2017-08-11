@@ -1,36 +1,42 @@
 #include "temp.h"
 
 void getTemp(){
-  DHT dht(tempSens, DHTTYPE); //// Initialize DHT sensor for normal 16mhz Arduino
+  DHT dht(tempSens, DHTTYPE); // Initialize DHT sensor for normal 16mhz Arduino
 
   dht.begin();
 
-  for (int i=0; i<100; i++){
-    humidity = dht.readHumidity();
-    temperature = dht.readTemperature();
-  }
-  humidity=(int)(humidity/100);
-  temperature=(int)(temperature/100);
+  humidity=dht.readHumidity();
+  temperature=dht.readTemperature();
+
+  temperature-=2;
+  
+//  for (int i=0; i<100; i++){
+//    humidity += dht.readHumidity();
+//    temperature += dht.readTemperature();
+//  }
+//  humidity=(int)(humidity/100);
+//  temperature=(int)(temperature/100);
 }
 
 void showTemp(){
-    matrix.clear();
-    print_temp(temperature);
-    delay(3000);
-    matrix.clear();
-    print_hum(humidity);
-    delay(2000);
-    matrix.clear();
+  getTemp();
+  matrix.clear();
+  print_temp(temperature>-1?temperature:0);
+  delay(3000);
+  matrix.clear();
+  print_hum(humidity);
+  delay(2000);
+  matrix.clear();
 }
 
 // OLD CODE for TMP36
 // void getTemp(){
 //   int read_an=analogRead(tempSens);
 //   double temp_app=((read_an*0.0048)-0.5)*100;
-//   Serial.print("Read_an: ");
-//   Serial.println(read_an);
-//   Serial.print("Temp: ");
-//   Serial.println(temp_app);
+//   // Serial.print("Read_an: ");
+//   // Serial.println(read_an);
+//   // Serial.print("Temp: ");
+//   // Serial.println(temp_app);
 //   if (temp_app<temperature-0.5 || temp_app>temperature+0.5){
 //     double app=temp_app-(int)temp_app;
 //     if(app<0.3){
