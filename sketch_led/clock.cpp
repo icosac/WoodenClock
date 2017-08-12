@@ -75,12 +75,11 @@ void closeTime(){
     // Serial.print(":");
     // Serial.println(old.minute());
     rtc.adjust(DateTime(old.year(), old.month(), old.day(), appHour, appMin, old.second()));
-    old=rtc.now();
+//    old=rtc.now();
     // Serial.print("new: ");
     // Serial.print(old.hour());
     // Serial.print(":");
     // Serial.println(old.minute());
-    appClock=0;
     closingClock=false;
     //count1=0;
   }

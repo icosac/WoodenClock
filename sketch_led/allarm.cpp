@@ -12,7 +12,6 @@ void closeTimer(){
   if (appAllarm==0){ //Se ha finito il countdown allora setto tutto alla normalità ed esco
     // digitalWrite(Sveglia, LOW);
     closingAllarm=false;
-    ALLARM=false;
     // count1=0;
   }
   else if (appAllarm>0){ //Altrimenti la funzione si richiama fintanto che il countdown non è finito e si continua a premere il pulsante
@@ -94,27 +93,34 @@ void wannaTimer(){
   matrix.clear();
 }
 
+File myfile;
+
 void setAllarm(){
+  Serial.println("Entro");
   TMRpcm tmrpcm;
   tmrpcm.speakerPin = Speaker;
+  Serial.println("Entro");
   if (!SD.begin(7)) {
-    // Serial.println("SD fail");
+    Serial.println("SD fail");
     return;
   }
+  Serial.println("Entro");
   tmrpcm.setVolume(4);
   tmrpcm.play("Allarm.wav");
-  while(tmrcmp.isplaying()){
-    Serial.println("BELLAAAA")
+  Serial.println(tmrpcm.isPlaying());
+  while(tmrpcm.isPlaying()){
     if(digitalRead(ButtonAllarm)==HIGH ||
         digitalRead(ButtonClock)==HIGH ||
         digitalRead(ButtonHour)==HIGH ||
-        digitalRead(ButtonMin)==HIGH ||
-        digitalRead(ButtonTemp)==HIGH){
-
-      tmrpcm.stopPlayback();
-      closeTimer();
-      return;
+        digitalRead(ButtonMin)==HIGH 
+       ){
+      break;
     }
   }
-  tmrpcm.stopPlayback();
+  Serial.println("NOPE");
+  ALLARM=false;
+  tmrpcm.disable();
+//  tmrpcm.stopPlayback();
+//  delay(18000);
+//  digitalWrite(10, LOW);
 }

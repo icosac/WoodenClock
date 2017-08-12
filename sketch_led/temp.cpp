@@ -1,6 +1,24 @@
 #include "temp.h"
 
-void getTemp(){
+//void getTemp(){
+//  DHT dht(tempSens, DHTTYPE); // Initialize DHT sensor for normal 16mhz Arduino
+//
+//  dht.begin();
+//
+//  humidity=dht.readHumidity();
+//  temperature=dht.readTemperature();
+//
+//  temperature-=2;
+//  
+//  for (int i=0; i<100; i++){
+//    humidity += dht.readHumidity();
+//    temperature += dht.readTemperature();
+//  }
+//  humidity=(int)(humidity/100);
+//  temperature=(int)(temperature/100);
+//}
+
+void showTemp(){
   DHT dht(tempSens, DHTTYPE); // Initialize DHT sensor for normal 16mhz Arduino
 
   dht.begin();
@@ -8,18 +26,8 @@ void getTemp(){
   humidity=dht.readHumidity();
   temperature=dht.readTemperature();
 
-  temperature-=2;
-  
-//  for (int i=0; i<100; i++){
-//    humidity += dht.readHumidity();
-//    temperature += dht.readTemperature();
-//  }
-//  humidity=(int)(humidity/100);
-//  temperature=(int)(temperature/100);
-}
-
-void showTemp(){
-  getTemp();
+  // Serial.print("Temperatura: "); // Serial.println(temperature);
+  // Serial.print("Umidità: "); // Serial.println(humidity);
   matrix.clear();
   print_temp(temperature>-1?temperature:0);
   delay(3000);

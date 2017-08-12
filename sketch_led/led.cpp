@@ -143,17 +143,6 @@ byte sepAllarm[]={ B00000000,
               B00000000
 };
 
-byte clean[]={ B00000000,
-              B00000000,
-              B00000000,
-              B00000000,
-              B00000000,
-              B00000000,
-              B00000000,
-              B00000000,
-              B00000000
-};
-
 byte Celsius[]={ B0000000,
               B00000000,
               B11110000,
@@ -194,7 +183,6 @@ void print_time(int hh, int mm){
     }
   }
   else {
-    //matrix.drawBitmap(8, 0, clean, 3, 9, LEDBRIGHTNESS);
     matrix.drawPixel(8, 2, 0);
     matrix.drawPixel(8, 6, 0);
     matrix.drawPixel(8, 3, 0);
@@ -205,8 +193,6 @@ void print_time(int hh, int mm){
 }
 
 void print_temp(int tt){
-  Serial.print("Temprature: ");
-  Serial.println(tt);
   String temp=convertIntTo2DigitString(tt);
 
   matrix.drawBitmap(0, 0, (byte*)(noArray[(int)(temp[0]-'0')]), 3, 9, LEDBRIGHTNESS);
@@ -217,10 +203,8 @@ void print_temp(int tt){
 
 
 void print_hum(int uu){
-  Serial.print("Humidity: ");
-  Serial.println(uu);
   if (uu==100){//Fuck, are you in the Amazon rainforest??
-    uu==99;
+    uu=99;
   }
   String hum=convertIntTo2DigitString(uu);
 

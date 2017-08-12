@@ -33,8 +33,8 @@ const int DHTTYPE=22;
 
 Adafruit_IS31FL3731 matrix = Adafruit_IS31FL3731();;
 int LEDBRIGHTNESS=30;
-const int BRIGHTNESSCTRL=A1;
-int BRIGHTANLG=120;
+//const int BRIGHTNESSCTRL=A1;
+//int BRIGHTANLG=120;
 
 bool ALLARM=false;
 

@@ -5,7 +5,7 @@
 #include "led.h"
 #include <DHT.h>
 
-void getTemp();
+//void getTemp();
 void showTemp();
 
 #endif

@@ -38,8 +38,8 @@ extern const int DHTTYPE;
 
 extern Adafruit_IS31FL3731 matrix;
 extern int LEDBRIGHTNESS;
-extern const int BRIGHTNESSCTRL;
-extern int BRIGHTANLG;
+//extern const int BRIGHTNESSCTRL;
+//extern int BRIGHTANLG;
 
 extern bool ALLARM;
 

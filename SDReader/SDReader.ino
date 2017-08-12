@@ -23,8 +23,12 @@
 
 TMRpcm tmrpcm;
 
+void(* resetFunc) (void) = 0; 
+
 void setup(){
   tmrpcm.speakerPin = 9;
+  pinMode(10, OUTPUT);
+  digitalWrite(10, HIGH);
   Serial.begin(9600);
   if (!SD.begin(7)) {
     Serial.println("SD fail");
@@ -37,10 +41,11 @@ void setup(){
   tmrpcm.play("Allarm.wav");
 }
 
+
 void loop(){  }
 
 
-//
+
 //File myFile;
 //
 //void setup() {
@@ -51,20 +56,15 @@ void loop(){  }
 //  }
 //  Serial.print("Initializing SD card...");
 //
-//  if (!SD.begin(4)) {
+//  if (!SD.begin(7)) {
 //    Serial.println("initialization failed!");
 //    return;
 //  }
 //  Serial.println("initialization done.");
-//
-//  // open the file. note that only one file can be open at a time,
-//  // so you have to close this one before opening another.
 //  myFile = SD.open("prova.txt", FILE_READ);
 //  Serial.println(myFile);
 //  if (myFile) {
 //    Serial.println("prova.txt:");
-//
-//    // read from the file until there's nothing else in it:
 //    while (myFile.available()) {
 //      Serial.write(myFile.read());
 //    }
