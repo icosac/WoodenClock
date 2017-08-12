@@ -4,18 +4,16 @@
 #include <RTClib.h>
 #include <Adafruit_IS31FL3731.h>
 
-extern const int AN_HIGH;
-
 extern const int ButtonHour;
 extern const int ButtonMin;
 extern const int ButtonAllarm;
 extern const int ButtonClock;
 extern const int ButtonTemp;
 
-extern const int SDCS;
-extern const int SDMOSI;
-extern const int SDMISO;
-extern const int SDCLK;
+// extern const int SDCS;
+// extern const int SDMOSI;
+// extern const int SDMISO;
+// extern const int SDCLK;
 
 extern const int Speaker;
 

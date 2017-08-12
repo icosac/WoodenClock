@@ -1,17 +1,15 @@
 #include "variables.h"
 
-extern const int AN_HIGH=799;
-
 const int ButtonHour=2;
 const int ButtonMin=3;
 const int ButtonTemp=4;
 const int ButtonAllarm=6;
 const int ButtonClock=5;
 
-const int SDCS=7;
-const int SDMOSI=11;
-const int SDMISO=12;
-const int SDCLK=13;
+// const int SDCS=7;
+// const int SDMOSI=11;
+// const int SDMISO=12;
+// const int SDCLK=13;
 
 const int Speaker=9;
 

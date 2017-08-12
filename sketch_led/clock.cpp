@@ -1,18 +1,14 @@
 #include "clock.h"
 
 int appClock=0; //Counts the seconds for the button has been pressed
-// int count1=0;
 bool closingClock=false;
 int appHour=-1, appMin=-1;
-// int ClockState=HIGH;
 
 void modifyTime(){
   matrix.clear();
   // Serial.print("CAMBIO ORA ");
   // Serial.println(appClock);
   if (appClock==4){ //If the button has been pressed for 5 seconds (0-4) then change the time
-    // ClockState=HIGH;
-    // digitalWrite(Clock, ClockState);
     DateTime old=rtc.now(); //Saves the moment from which starts editing
     appHour=old.hour();
     appMin=old.minute();
@@ -84,7 +80,6 @@ void closeTime(){
     // Serial.print(old.hour());
     // Serial.print(":");
     // Serial.println(old.minute());
-    // digitalWrite(Sveglia, LOW);
     appClock=0;
     closingClock=false;
     //count1=0;
@@ -112,7 +107,4 @@ void updateTime(DateTime RTCtime){
     matrix.clear();
   }
   print_time(previousHour, previousMinute);
-  // previousSecond=RTCtime.second();
-  // previousDay=RTCtime.day();
-  // previousMonth=RTCtime.month();
 }

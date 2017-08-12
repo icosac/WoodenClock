@@ -9,14 +9,13 @@ bool closingAllarm=false;
 void closeTimer(){
   // Serial.print("CHIUDO  ");
   // Serial.println(appAllarm);
-  if (appAllarm==1){ //Se ha finito il countdown allora setto tutto alla normalità ed esco
+  if (appAllarm==0){ //Se ha finito il countdown allora setto tutto alla normalità ed esco
     // digitalWrite(Sveglia, LOW);
-    appAllarm=0;
     closingAllarm=false;
     ALLARM=false;
     // count1=0;
   }
-  else if (appAllarm>1){ //Altrimenti la funzione si richiama fintanto che il countdown non è finito e si continua a premere il pulsante
+  else if (appAllarm>0){ //Altrimenti la funzione si richiama fintanto che il countdown non è finito e si continua a premere il pulsante
     closingAllarm=true;
     appAllarm--;
     delay(1000);
@@ -35,7 +34,6 @@ void wannaTimer(){
   if (appAllarm==2){ //Se sono passati due secondi allora entra nel successivo ciclo while
     SvegliaState=HIGH;
     // digitalWrite(Sveglia, SvegliaState);
-    appAllarm++;
     ALLARM=true;
   }
   else if (appAllarm<2){ //Altrimenti si richiama ricorsivamente
@@ -46,9 +44,9 @@ void wannaTimer(){
     }
   }
   flash();
-  while(appAllarm>2||closingAllarm){ //Se sono passati due secondi o se si è provato a uscire ma non si è terminato il countdown
+  while(appAllarm>1||closingAllarm){ //Se sono passati due secondi o se si è provato a uscire ma non si è terminato il countdown
      if(closingAllarm){ //Risetto il countdown nel caso in cui si abbia deciso di non uscire
-      appAllarm=3;
+      appAllarm=2;
     }
     // if(count1==9){
     //   if (SvegliaState==HIGH){
@@ -104,19 +102,19 @@ void setAllarm(){
     return;
   }
   tmrpcm.setVolume(4);
-//  while(ALLARM){
-    tmrpcm.play("Allarm.wav");
+  tmrpcm.play("Allarm.wav");
+  while(tmrcmp.isplaying()){
+    Serial.println("BELLAAAA")
     if(digitalRead(ButtonAllarm)==HIGH ||
         digitalRead(ButtonClock)==HIGH ||
         digitalRead(ButtonHour)==HIGH ||
         digitalRead(ButtonMin)==HIGH ||
         digitalRead(ButtonTemp)==HIGH){
-  
+
       tmrpcm.stopPlayback();
-      ALLARM=false;
+      closeTimer();
       return;
     }
-    delay(18000);
-    tmrpcm.stopPlayback();
-//  }
+  }
+  tmrpcm.stopPlayback();
 }

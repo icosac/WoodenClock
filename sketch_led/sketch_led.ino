@@ -24,7 +24,6 @@ void setup() {
     // Serial.println("Matrix not found");
     while(1);
   }
-  RTCtime=rtc.now();
 }
 
 void loop() {
@@ -53,6 +52,6 @@ void loop() {
     BRIGHTANLG=analogread;
     LEDBRIGHTNESS=255*analogread/1023;
   }
-  
+
   delay(1000);
 }
