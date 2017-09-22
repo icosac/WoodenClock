@@ -41,6 +41,9 @@ void setup(){
     pinMode(ButtonTemp, INPUT);s
     pinMode(ButtonAlarm, INPUT);
     pinMode(ButtonClock, INPUT);
+    if (!(matrix.begin())){
+        while(1);
+    }
 }
 
 short count=1;
