@@ -4,6 +4,11 @@ short counter=3;
 short app_hour=0, app_min=0;
 
 void close_alarm(){
+    matrix.clear();
+    while(counter<3 && digitalRead(ButtonAlarm)==HIGH){
+        counter++;
+        delay(SECOND);
+    }
     if (counter==3){
         if (alarmHour==app_hour && alarmMinute==app_min){
             ALARM=false;
@@ -12,52 +17,41 @@ void close_alarm(){
             alarmHour=app_hour;
             alarmMinute=app_min;
         }
-    }
-    else {
-        counter++;
-        delay(SECOND);
-        if (digitalRead(ButtonAlarm)==HIGH){
-            close_alarm();
-        }
+        flash();
     }
 }
 
 void wanna_alarm(){
     matrix.clear();
-    if (counter>0){
+    while(counter>0 && digitalRead(ButtonAlarm)==HIGH){
         counter--;
         delay(SECOND);
-        if (digitalRead(ButtonAlarm)==HIGH){
-            wanna_alarm();
-        }
     }
-    else {
-        flash();
-        ALARM=true;
-        app_hour=alarmHour;
-        app_min=alarmMinute;
-        while(counter<4){
-            counter=counter>0? 0:counter;
-            if (digitalRead(ButtonAlarm)==HIGH){
-                close_alarm();
+    flash();
+    ALARM=true;
+    app_hour=alarmHour;
+    app_min=alarmMinute;
+    while(counter<3){
+        counter=counter>0? 0:counter;
+        if (digitalRead(ButtonAlarm)==HIGH){
+            close_alarm();
+        }
+        if (digitalRead(ButtonHour)==HIGH){
+            if (app_hour==23){
+                app_hour=0;
             }
-            if (digitalRead(ButtonHour)==HIGH){
+        }
+        if (digitalRead(ButtonMin)==HIGH){
+            if (app_min==59){
+                app_min=0;
                 if (app_hour==23){
                     app_hour=0;
                 }
             }
-            if (digitalRead(ButtonMin)==HIGH){
-                if (app_min==59){
-                    app_min=0;
-                    if (app_hour==23){
-                        app_hour=0;
-                    }
-                }
-            }
-            matrix.clear();
-            print_time(app_hour, app_min);
-            delay(100);
         }
+        matrix.clear();
+        print_time(app_hour, app_min);
+        delay(100);
     }
 }
 
