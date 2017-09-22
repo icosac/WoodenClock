@@ -26,6 +26,10 @@ Adafruit_IS31FL3731 matrix = Adafruit_IS31FL3731();;
 
 bool ALARM=false;
 
+<<<<<<< HEAD
+
+
+=======
 String convertshortTo2DigitString(short i)  {
   String s = String(i);
   if (i < 10)  {
@@ -81,3 +85,4 @@ String convertshortTo2DigitString(short i)  {
 //   }
 //   return s;
 // }
+>>>>>>> c541179cb7c3b156bbfc9548afae66ed594f0c5b
