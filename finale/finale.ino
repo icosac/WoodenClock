@@ -33,29 +33,27 @@ void showTemp(){
   print_hum(humidity);
   delay(2000);
   matrix.clear();
+  print_time(previousHour, previousMinute);
 }
 
 void setup(){
     pinMode(ButtonHour, INPUT);
     pinMode(ButtonMin, INPUT);
-    pinMode(ButtonTemp, INPUT);s
+    pinMode(ButtonTemp, INPUT);
     pinMode(ButtonAlarm, INPUT);
     pinMode(ButtonClock, INPUT);
     if (!(matrix.begin())){
         while(1);
     }
+    updateTime();
 }
 
 short count=1;
 
 void loop(){
-    if (count==6*SECOND){
+    if (count==60*SECOND){
         updateTime();
         count=1;
-    }
-    if (count==SECOND/2){
-        matrix.clear();
-        print_time(previousHour, previousMinute);
     }
     if(ALARM && previousMinute==alarmMinute && previousHour==alarmHour){
         set_alarm();
@@ -67,4 +65,11 @@ void loop(){
         print_time(alarmHour, alarmMinute);
     }
     if(digitalRead(ButtonAlarm)==HIGH){
+        wanna_alarm();
+    }
+    if (digitalRead(ButtonClock)==HIGH){
+        modify_clock();
+    }
+    count++;
+    delay(1);
 }

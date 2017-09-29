@@ -36,17 +36,17 @@ extern short alarmMinute;
 
 extern short temperature;
 extern short humidity;
-extern int previousHour;
-extern int previousMinute;
-extern int previousSecond;
-// extern int previousDay;
-// extern int previousMonth;
+extern short previousHour;
+extern short previousMinute;
+extern short previousSecond;
+// extern short previousDay;
+// extern short previousMonth;
 
-extern int timerHour;
-extern int timerMin;
+extern short timerHour;
+extern short timerMin;
 
-extern int temperature;
-extern int humidity;
+extern short temperature;
+extern short humidity;
 #define tempSens 8
 #define DHTTYPE 22
 
