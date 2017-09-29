@@ -62,7 +62,11 @@ void loop(){
         showTemp();
     }
     if(digitalRead(ButtonHour)==HIGH|| digitalRead(ButtonMin)==HIGH){
+        matrix.clear();
         print_time(alarmHour, alarmMinute);
+        delay(SECOND*2);
+        matrix.clear();
+        print_time(previousHour, previousMinute);
     }
     if(digitalRead(ButtonAlarm)==HIGH){
         wanna_alarm();

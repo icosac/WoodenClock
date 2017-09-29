@@ -10,7 +10,6 @@
 #define ButtonMin 3
 #define ButtonTemp 4
 #define ButtonAlarm 6
-#define Buttonalarm 6
 #define ButtonClock 5
 
 // extern  const short SDCS;

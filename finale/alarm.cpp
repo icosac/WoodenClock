@@ -31,14 +31,20 @@ void wanna_alarm(){
     ALARM=true;
     app_hour=alarmHour;
     app_min=alarmMinute;
+    counter=counter==0? counter:3;
     while(counter<3){
-        counter=counter>0? 0:counter;
         if (digitalRead(ButtonAlarm)==HIGH){
             close_alarm();
+            if (!ALARM){
+                break;
+            }
         }
         if (digitalRead(ButtonHour)==HIGH){
             if (app_hour==23){
                 app_hour=0;
+            }
+            else {
+                app_hour++;
             }
         }
         if (digitalRead(ButtonMin)==HIGH){
@@ -48,11 +54,16 @@ void wanna_alarm(){
                     app_hour=0;
                 }
             }
+            else {
+                app_min++;
+            }
         }
         matrix.clear();
         print_time(app_hour, app_min);
         delay(100);
     }
+    matrix.clear();
+    print_time(previousHour, previousMinute);
 }
 
 void set_alarm(){
@@ -60,13 +71,12 @@ void set_alarm(){
     tmrpcm.speakerPin = Speaker;
 
     if (!SD.begin(7)) {
-        Serial.println("SD fail");
+        //Serial.println("SD fail");
         return;
     }
 
     tmrpcm.setVolume(4);
     tmrpcm.play("alarm.wav");
-    Serial.println(tmrpcm.isPlaying());
     while(tmrpcm.isPlaying()){
         if(digitalRead(ButtonAlarm)==HIGH ||
                 digitalRead(ButtonClock)==HIGH ||

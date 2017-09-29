@@ -18,29 +18,40 @@ void modify_clock(){
         delay(SECOND);
     }
     flash();
-    while(counte<4){
-        counte=counte>0? 0:counte;
-        if (digitalRead(ButtonHour)==HIGH){
-            if (previousHour==23){
-                previousHour=0;
+    if (counte==0){
+        while(counte<4){
+            counte=0;
+            if (digitalRead(ButtonHour)==HIGH){
+                if (previousHour==23){
+                    previousHour=0;
+                }
+                else {
+                    previousHour++;
+                }
             }
-            else {
-                previousHour++;
+            if (digitalRead(ButtonMin)==HIGH){
+                if (previousMinute==59){
+                    previousMinute=0;
+                }
+                else {
+                    previousMinute++;
+                }
             }
-        }
-        if (digitalRead(ButtonMin)==HIGH){
-            if (previousMinute==59){
-                previousMinute=0;
+            if (digitalRead(ButtonClock)==HIGH){
+                close_modify();
+                if (counte==4)
+                    break;
             }
-            else {
-                previousMinute++;
-            }
-        }
-        if (digitalRead(ButtonClock)==HIGH){
-            close_modify();
+            matrix.clear();
+            print_time(previousHour, previousMinute);
+            delay(100);          
         }
         matrix.clear();
-        print_time(previousHour, previousMinute);
-        delay(100);
+        DateTime old=rtc.now();
+        rtc.adjust(DateTime(old.year(), old.month(), old.day(), previousHour, previousMinute, old.second()));
     }
+    else {
+        counte==4;       
+    }
+    print_time(previousHour, previousMinute);   
 }
