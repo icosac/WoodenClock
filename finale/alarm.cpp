@@ -70,13 +70,13 @@ void set_alarm(){
     TMRpcm tmrpcm;
     tmrpcm.speakerPin = Speaker;
 
-    if (!SD.begin(7)) {
-        //Serial.println("SD fail");
+    if (!SD.begin(SDpin)) {
+        // Serial.println("SD fail");
         return;
     }
 
     tmrpcm.setVolume(4);
-    tmrpcm.play("alarm.wav");
+    tmrpcm.play("allarm.wav");
     while(tmrpcm.isPlaying()){
         if(digitalRead(ButtonAlarm)==HIGH ||
                 digitalRead(ButtonClock)==HIGH ||

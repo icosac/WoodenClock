@@ -17,7 +17,8 @@
 // extern  const short SDMISO;
 // extern  const short SDCLK;
 
-#define Speaker 9;
+#define Speaker 9
+#define SDpin 7
 
 // extern  const short Sveglia;
 // extern  const short Clock;

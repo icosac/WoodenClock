@@ -57,6 +57,7 @@ void loop(){
     }
     if(ALARM && previousMinute==alarmMinute && previousHour==alarmHour){
         set_alarm();
+        ALARM=false;    
     }
     if(digitalRead(ButtonTemp)==HIGH){
         showTemp();
