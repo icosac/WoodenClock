@@ -13,7 +13,7 @@ void updateTime(){ //LASCIATO QUA PER CONVENIENZA
         previousHour=date.hour();
     }
     matrix.clear();
-    print_time(previousHour, previousMinute);
+    print_time(true, previousHour, previousMinute);
 }
 
 void showTemp(){
@@ -33,10 +33,11 @@ void showTemp(){
   print_hum(humidity);
   delay(2000);
   matrix.clear();
-  print_time(previousHour, previousMinute);
+  print_time(true, previousHour, previousMinute);
 }
 
 void setup(){
+    Serial.begin(9600);
     pinMode(ButtonHour, INPUT);
     pinMode(ButtonMin, INPUT);
     pinMode(ButtonTemp, INPUT);
@@ -49,11 +50,18 @@ void setup(){
 }
 
 short count=1;
+bool dots=false;
 
 void loop(){
     if (count==60*SECOND){
         updateTime();
         count=1;
+    }
+    if (count%SECOND==0){
+        Serial.println("Entro");
+        Serial.print("dots: "); Serial.println(dots);
+        print_time(dots, previousHour, previousMinute);
+        dots=!dots;
     }
     if(ALARM && previousMinute==alarmMinute && previousHour==alarmHour){
         set_alarm();
@@ -64,10 +72,10 @@ void loop(){
     }
     if(digitalRead(ButtonHour)==HIGH|| digitalRead(ButtonMin)==HIGH){
         matrix.clear();
-        print_time(alarmHour, alarmMinute);
+        print_time(true, alarmHour, alarmMinute);
         delay(SECOND*2);
         matrix.clear();
-        print_time(previousHour, previousMinute);
+        print_time(true, previousHour, previousMinute);
     }
     if(digitalRead(ButtonAlarm)==HIGH){
         wanna_alarm();

@@ -168,13 +168,13 @@ byte percentage[]={
 
 byte *noArray[] = {zero, one, two, three, four, five, six, seven, eight, nine};
 
-void print_time(short hh, short mm){
+void print_time(bool dots, short hh, short mm){
   String hour=int2String(hh);
   String min=int2String(mm);
 
   matrix.drawBitmap(0, 0, (byte*)(noArray[(int)(hour[0]-'0')]), 3, 9, LEDBRIGHTNESS);
   matrix.drawBitmap(4, 0, (byte*)(noArray[(int)(hour[1]-'0')]), 3, 9, LEDBRIGHTNESS);
-  if((previousSecond%2)==0){
+  if(dots){
     if (ALARM){
       matrix.drawBitmap(8, 0, sepalarm, 3, 9, LEDBRIGHTNESS);
     }

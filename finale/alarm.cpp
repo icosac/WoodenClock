@@ -59,11 +59,11 @@ void wanna_alarm(){
             }
         }
         matrix.clear();
-        print_time(app_hour, app_min);
+        print_time(true, app_hour, app_min);
         delay(100);
     }
     matrix.clear();
-    print_time(previousHour, previousMinute);
+    print_time(true, previousHour, previousMinute);
 }
 
 void set_alarm(){

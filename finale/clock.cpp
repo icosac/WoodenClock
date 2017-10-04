@@ -43,7 +43,7 @@ void modify_clock(){
                     break;
             }
             matrix.clear();
-            print_time(previousHour, previousMinute);
+            print_time(true, previousHour, previousMinute);
             delay(100);          
         }
         matrix.clear();
@@ -53,5 +53,5 @@ void modify_clock(){
     else {
         counte==4;       
     }
-    print_time(previousHour, previousMinute);   
+    print_time(true, previousHour, previousMinute);   
 }
